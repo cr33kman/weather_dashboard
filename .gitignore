@@ -11,6 +11,9 @@ logs/
 *.log
 *.tmp
 
+# Local data
+data/
+
 # IDE configurations
 .vscode/
 .idea/
