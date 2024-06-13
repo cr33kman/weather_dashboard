@@ -2,7 +2,7 @@ import requests
 import os
 
 
-def fetch_weather_data(location):
+def fetch_weather_data(location, fetch_forecast):
     api_key = os.getenv("WEATHER_API_KEY")
     if not api_key:
         raise ValueError(
@@ -10,10 +10,12 @@ def fetch_weather_data(location):
         )
 
     base_url = "http://api.weatherapi.com/v1"
-    current_weather_url = f"{base_url}/current.json?key={api_key}&q={location}"
+    full_url = f"{base_url}/current.json?key={api_key}&q={location}"
+    if fetch_forecast:
+        full_url = f"{base_url}/forecast.json?key={api_key}&q={location}&days={4}"
 
     try:
-        response = requests.get(current_weather_url)
+        response = requests.get(full_url)
         response.raise_for_status()
         return response.json()
 
