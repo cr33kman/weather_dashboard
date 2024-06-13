@@ -2,7 +2,7 @@ import requests
 import os
 
 
-def fetch_weather_data(location, fetch_forecast):
+def fetch_search_results(query):
     api_key = os.getenv("WEATHER_API_KEY")
     if not api_key:
         raise ValueError(
@@ -10,9 +10,7 @@ def fetch_weather_data(location, fetch_forecast):
         )
 
     base_url = "http://api.weatherapi.com/v1"
-    full_url = f"{base_url}/current.json?key={api_key}&q={location}"
-    if fetch_forecast:
-        full_url = f"{base_url}/forecast.json?key={api_key}&q={location}&days={4}"
+    full_url = f"{base_url}/search.json?key={api_key}&q={query}"
 
     try:
         response = requests.get(full_url)
@@ -20,9 +18,7 @@ def fetch_weather_data(location, fetch_forecast):
         return response.json()
 
     except requests.exceptions.HTTPError as err:
-        if response.status_code in [400, 404]:
-            print(f"Location '{location}' not found.")
-        elif response.status_code == 401:
+        if response.status_code == 401:
             print("Unauthorized access - check your API key.")
         else:
             print(f"HTTP error occured: {err}")

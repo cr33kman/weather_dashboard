@@ -1,3 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom Styles */
+body {
+  background: linear-gradient(to bottom, rgb(31 41 55), #1a202c);
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #ffffff;
+}
+
+p {
+  color: #d1d5db;
+}
+
+a {
+  color: #3b82f6;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #60a5fa;
+}
